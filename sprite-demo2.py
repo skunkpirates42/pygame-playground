@@ -35,10 +35,18 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         # center the sprite on the screen
         self.rect.center = (WIDTH / 2, HEIGHT / 2)
+        # set y-axis speed -- this will be used in the update function below
+        # NOTE: y-axis start at 0 at the top and gets bigger as it goes down
+        self.y_speed = 5
 
     def update(self):
         # any code here will happen every time the game loop updates
         self.rect.x += -5
+        self.rect.y += self.y_speed
+        if self.rect.bottom > HEIGHT - 200:
+          self.y_speed = -5
+        if self.rect.top < 200:
+          self.y_speed = 5
         if self.rect.right < 0:
             self.rect.left = WIDTH
 
